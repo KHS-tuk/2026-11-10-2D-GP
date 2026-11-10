@@ -19,3 +19,22 @@ class Bird:
         self.y = y
         self.frame = 0.0
         self.direction = 1
+
+    def draw(self):
+        frame_index = int(self.frame)
+        column = frame_index % 5
+        row = frame_index // 5
+        source_y = self.IMAGE_HEIGHT - (row + 1) * self.FRAME_HEIGHT
+        flip = '' if self.direction == 1 else 'h'
+        self.image.clip_composite_draw(
+            column * self.FRAME_WIDTH,
+            source_y,
+            self.FRAME_WIDTH,
+            self.FRAME_HEIGHT,
+            0,
+            flip,
+            self.x,
+            self.y,
+            self.DRAW_WIDTH,
+            self.DRAW_HEIGHT,
+        )
