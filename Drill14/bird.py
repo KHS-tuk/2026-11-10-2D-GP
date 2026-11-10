@@ -39,7 +39,7 @@ class Bird:
         source_x = self.FRAME_X[column]
         source_width = self.FRAME_X_END[column] - source_x
         source_y = self.IMAGE_HEIGHT - self.FRAME_Y_END[row]
-        source_height = source_y - self.FRAME_Y[row]
+        source_height = self.FRAME_Y_END[row] - self.FRAME_Y[row]
         flip = '' if self.direction == 1 else 'h'
         self.image.clip_composite_draw(
             source_x,
