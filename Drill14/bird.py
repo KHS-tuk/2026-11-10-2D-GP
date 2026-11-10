@@ -16,13 +16,13 @@ class Bird:
 
     image = None
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, direction=1):
         if Bird.image is None:
             Bird.image = load_image('bird_animation.png')
         self.x = x
         self.y = y
         self.frame = 0.0
-        self.direction = 1
+        self.direction = direction
 
     def update(self):
         frame_time = game_framework.frame_time
