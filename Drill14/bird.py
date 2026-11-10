@@ -4,11 +4,12 @@ import game_framework
 
 
 class Bird:
-    FRAME_WIDTH = 183
-    FRAME_HEIGHT = 168
     FRAME_COUNT = 14
-    IMAGE_WIDTH = 918
     IMAGE_HEIGHT = 506
+    FRAME_X = (0, 183, 366, 549, 732)
+    FRAME_X_END = (183, 366, 549, 732, 918)
+    FRAME_Y = (0, 169, 338)
+    FRAME_Y_END = (169, 338, 506)
     DRAW_WIDTH = 110
     DRAW_HEIGHT = 100
     FRAMES_PER_SECOND = 12.0
@@ -35,13 +36,16 @@ class Bird:
         frame_index = int(self.frame)
         column = frame_index % 5
         row = frame_index // 5
-        source_y = self.IMAGE_HEIGHT - (row + 1) * self.FRAME_HEIGHT
+        source_x = self.FRAME_X[column]
+        source_width = self.FRAME_X_END[column] - source_x
+        source_y = self.IMAGE_HEIGHT - self.FRAME_Y_END[row]
+        source_height = source_y - self.FRAME_Y[row]
         flip = '' if self.direction == 1 else 'h'
         self.image.clip_composite_draw(
-            column * self.FRAME_WIDTH,
+            source_x,
             source_y,
-            self.FRAME_WIDTH,
-            self.FRAME_HEIGHT,
+            source_width,
+            source_height,
             0,
             flip,
             self.x,
